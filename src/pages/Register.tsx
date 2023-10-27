@@ -15,7 +15,6 @@ interface SignupData {
     district?: string;
     school: string;
     detailedAddress: string;
-    // ... other properties if needed
 }
 
 const Register = () => {

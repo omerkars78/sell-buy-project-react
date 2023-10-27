@@ -4,7 +4,21 @@ const api = axios.create({
     baseURL: 'http://localhost:3000',  // Back-end sunucunuzun URL'si
 });
 
-export const signup = async (data: { email: string, password: string, name: string }) => {
+export const signup = async (data: {
+    name: string;
+    surname: string;
+    genderId: number;
+    birthday: Date;
+    email: string;
+    password: string;
+    profileImage?: string;
+    userType?: string;
+    country?: string;
+    city: string;
+    district?: string;
+    school: string;
+    detailedAddress: string;
+}) => {
     try {
         const response = await api.post('/signup', data);
         return response.data;
