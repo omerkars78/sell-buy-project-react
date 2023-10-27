@@ -1,13 +1,15 @@
-// src/App.tsx
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import RegisterPage from './containers/RegisterPage';
+import React, { FC } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
-const App: React.FC = () => {
+const App: FC = () => {
     return (
         <Router>
-            <Route path="/register" Component={RegisterPage} />
-            {/* Other routes */}
+            <Routes>
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+            </Routes>
         </Router>
     );
 };

@@ -1,29 +1,34 @@
-// src/services/authService.ts
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/';
+const api = axios.create({
+    baseURL: 'http://localhost:3000',  // Back-end sunucunuzun URL'si
+});
 
-export const signup = async (userData: any) => {
-    const response = await axios.post(`${API_URL}signup`, userData);
-    return response.data;
+export const signup = async (data: { email: string, password: string, name: string }) => {
+    try {
+        const response = await api.post('/signup', data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const login = async (credentials: any) => {
-    const response = await axios.post(`${API_URL}login`, credentials);
-    return response.data;
+export const login = async (credentials: { email: string, password: string }) => {
+    try {
+        const response = await api.post('/login', credentials);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const logout = async () => {
-    const response = await axios.post(`${API_URL}logout`);
-    return response.data;
+export const resetPassword = async (email: string) => {
+    try {
+        const response = await api.post('/reset-password', { email });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const getProfile = async () => {
-    const response = await axios.get(`${API_URL}profile`);
-    return response.data;
-};
-
-export const updateProfile = async (updatedData: any) => {
-    const response = await axios.put(`${API_URL}update-profile`, updatedData);
-    return response.data;
-};
+// Diğer fonksiyonları da benzer şekilde ekleyin...
