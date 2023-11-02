@@ -20,7 +20,7 @@ export const signup = async (data: {
     detailedAddress: string;
 }) => {
     try {
-        const response = await api.post('/signup', data);
+        const response = await api.post('/auth/signup', data);
         return response.data;
     } catch (error) {
         throw error;
@@ -29,7 +29,7 @@ export const signup = async (data: {
 
 export const login = async (credentials: { email: string, password: string }) => {
     try {
-        const response = await api.post('/login', credentials);
+        const response = await api.post('/auth/login', credentials);
         return response.data;
     } catch (error) {
         throw error;
@@ -38,7 +38,7 @@ export const login = async (credentials: { email: string, password: string }) =>
 
 export const resetPassword = async (email: string) => {
     try {
-        const response = await api.post('/reset-password', { email });
+        const response = await api.post('/auth/reset-password', { email });
         return response.data;
     } catch (error) {
         throw error;

@@ -4,6 +4,7 @@ import { signup } from '../services/authService';
 interface SignupData {
     name: string;
     surname: string;
+    nickname:string,
     genderId: number;
     birthday: Date;
     email: string;
@@ -20,6 +21,7 @@ interface SignupData {
 const Register = () => {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
+    const [nickname, setNickname] = useState('');
     const [genderId, setGenderId] = useState<string | ''>('');
     const [birthday, setBirthday] = useState<string | ''>('');
     const [email, setEmail] = useState('');
@@ -39,6 +41,7 @@ const Register = () => {
             const data = await signup({
                 name,
                 surname,
+                nickname,
                 genderId: Number(genderId),
                 birthday: new Date(birthday),
                 email,
@@ -65,6 +68,7 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required /><br />
             <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} placeholder="Surname" required /><br />
+            <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="Nickname" required /><br />
             <input type="number" value={genderId} onChange={(e) => setGenderId(e.target.value)} placeholder="Gender ID" required /><br />
             <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} placeholder="Birthday" required /><br />
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required /><br />
