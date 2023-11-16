@@ -12,17 +12,18 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <div className="flex flex-grow">
-        <Sidebar />
-        <Content>
-          {children || <Outlet />} {/* children veya Outlet kullanımı */}
+    <div className="flex flex-col min-h-screen w-full">
+      <Header className="w-full" /> {/* Ensure Header is full width */}
+      <div className="flex flex-grow w-full">
+        <Sidebar  /> {/* Sidebar should stretch full height */}
+        <Content className="flex-grow">
+          {children || <Outlet />}
         </Content>
       </div>
-      <Footer />
+      <Footer className="w-full" /> {/* Ensure Footer is full width */}
     </div>
   );
 };
+
 
 export default MainLayout;
