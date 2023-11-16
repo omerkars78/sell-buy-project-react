@@ -1,17 +1,15 @@
 // components/Content.tsx
 import React, { ReactNode } from 'react';
-import { Container } from '@mui/material';
 
 interface ContentProps {
   children: ReactNode;
+  className?: string;
 }
 
-const Content: React.FC<ContentProps> = ({ children }) => {
+const Content: React.FC<ContentProps> = ({ children, className }) => {
   return (
-    <main className="flex-grow">
-      <Container maxWidth="lg" className="py-4">
-        {children}
-      </Container>
+    <main className={className}>
+      {children}
     </main>
   );
 };
