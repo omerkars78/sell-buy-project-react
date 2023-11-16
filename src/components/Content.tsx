@@ -1,5 +1,6 @@
 // components/Content.tsx
 import React, { ReactNode } from 'react';
+import { Container } from '@mui/material';
 
 interface ContentProps {
   children: ReactNode;
@@ -7,8 +8,10 @@ interface ContentProps {
 
 const Content: React.FC<ContentProps> = ({ children }) => {
   return (
-    <main style={{ padding: '15px' }}>
-      {children}
+    <main className="flex-grow">
+      <Container maxWidth="lg" className="py-4">
+        {children}
+      </Container>
     </main>
   );
 };

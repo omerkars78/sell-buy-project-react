@@ -7,19 +7,21 @@ import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
 
 interface MainLayoutProps {
-  children?: ReactNode;  // Make children optional
+  children?: ReactNode;  // children prop'u opsiyonel
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <Sidebar />
-      <Content>
-        {children || <Outlet />} {/* Use Outlet if children is not provided */}
-      </Content>
+      <div className="flex flex-grow">
+        <Sidebar />
+        <Content>
+          {children || <Outlet />} {/* children veya Outlet kullanımı */}
+        </Content>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

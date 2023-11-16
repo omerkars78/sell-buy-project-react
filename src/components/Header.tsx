@@ -1,11 +1,16 @@
 // components/Header.tsx
 import React from 'react';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 
 const Header: React.FC = () => {
   return (
-    <header style={{ backgroundColor: 'lightblue', padding: '10px', textAlign: 'center' }}>
-      <h1>Web Sitemizin Başlığı</h1>
-    </header>
+    <AppBar position="static" color="primary" className="shadow-lg">
+      <Toolbar className="justify-center">
+        <Typography variant="h6" className="text-white">
+          Web Sitemizin Başlığı
+        </Typography>
+      </Toolbar>
+    </AppBar>
   );
 };
 

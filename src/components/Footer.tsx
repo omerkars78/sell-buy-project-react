@@ -1,10 +1,13 @@
 // components/Footer.tsx
 import React from 'react';
+import { Container } from '@mui/material';
 
 const Footer: React.FC = () => {
   return (
-    <footer style={{ backgroundColor: 'lightblue', padding: '10px', textAlign: 'center' }}>
-      <p>Haklarımız Saklıdır © 2023</p>
+    <footer className="bg-lightblue text-center p-4 mt-auto">
+      <Container maxWidth="lg">
+        <p className="m-0">Haklarımız Saklıdır © 2023</p>
+      </Container>
     </footer>
   );
 };

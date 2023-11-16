@@ -1,15 +1,17 @@
 // components/Sidebar.tsx
 import React from 'react';
+import { AppBar, Toolbar, Button } from '@mui/material';
 
 const Sidebar: React.FC = () => {
   return (
-    <aside style={{ backgroundColor: 'lightgray', padding: '10px' }}>
-      <ul>
-        <li>Ana Sayfa</li>
-        <li>Giriş Yap</li>
-        <li>Kayıt Ol</li>
-      </ul>
-    </aside>
+    <AppBar position="static" color="default" className="shadow-md">
+      <Toolbar className="justify-between">
+        <Button color="inherit">Ana Sayfa</Button>
+        <Button color="inherit">Giriş Yap</Button>
+        <Button color="inherit">Kayıt Ol</Button>
+        {/* Diğer menü öğeleri */}
+      </Toolbar>
+    </AppBar>
   );
 };
 
