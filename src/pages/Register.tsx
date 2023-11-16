@@ -1,10 +1,11 @@
+// components/Register.tsx
 import React, { useState } from 'react';
 import { signup } from '../services/authService';
 
 interface SignupData {
     name: string;
     surname: string;
-    nickname:string,
+    nickname: string;
     genderId: number;
     birthday: Date;
     email: string;
@@ -18,7 +19,7 @@ interface SignupData {
     detailedAddress: string;
 }
 
-const Register = () => {
+const Register: React.FC = () => {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [nickname, setNickname] = useState('');
@@ -65,24 +66,26 @@ const Register = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required /><br />
-            <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} placeholder="Surname" required /><br />
-            <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="Nickname" required /><br />
-            <input type="number" value={genderId} onChange={(e) => setGenderId(e.target.value)} placeholder="Gender ID" required /><br />
-            <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} placeholder="Birthday" required /><br />
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required /><br />
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required /><br />
-            <input type="text" value={profileImage} onChange={(e) => setProfileImage(e.target.value)} placeholder="Profile Image URL" /><br />
-            <input type="text" value={userType} onChange={(e) => setUserType(e.target.value)} placeholder="User Type" /><br />
-            <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} placeholder="Country" /><br />
-            <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" required /><br />
-            <input type="text" value={district} onChange={(e) => setDistrict(e.target.value)} placeholder="District" /><br />
-            <input type="text" value={school} onChange={(e) => setSchool(e.target.value)} placeholder="School" required /><br />
-            <input type="text" value={detailedAddress} onChange={(e) => setDetailedAddress(e.target.value)} placeholder="Detailed Address" required /><br />
-            <button type="submit">Register</button>
-            {error && <div className="error">{error}</div>}
-        </form>
+        <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required /><br />
+                <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} placeholder="Surname" required /><br />
+                <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="Nickname" required /><br />
+                <input type="number" value={genderId} onChange={(e) => setGenderId(e.target.value)} placeholder="Gender ID" required /><br />
+                <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} placeholder="Birthday" required /><br />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required /><br />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required /><br />
+                <input type="text" value={profileImage} onChange={(e) => setProfileImage(e.target.value)} placeholder="Profile Image URL" /><br />
+                <input type="text" value={userType} onChange={(e) => setUserType(e.target.value)} placeholder="User Type" /><br />
+                <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} placeholder="Country" /><br />
+                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" required /><br />
+                <input type="text" value={district} onChange={(e) => setDistrict(e.target.value)} placeholder="District" /><br />
+                <input type="text" value={school} onChange={(e) => setSchool(e.target.value)} placeholder="School" required /><br />
+                <input type="text" value={detailedAddress} onChange={(e) => setDetailedAddress(e.target.value)} placeholder="Detailed Address" required /><br />
+                <button type="submit" style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>Register</button>
+                {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
+            </form>
+        </div>
     );
 };
 

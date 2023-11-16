@@ -1,29 +1,23 @@
-import * as React from 'react';
-import { Outlet } from 'react-router-dom';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+// components/MainLayout.tsx
+import React, { ReactNode } from 'react';
 import Header from './Header';
-import SideBar from './SideBar';
+import Sidebar from './SideBar';
 import Content from './Content';
 import Footer from './Footer';
+import { Outlet } from 'react-router-dom';
 
-const MainLayout: React.FC = () => {
+interface MainLayoutProps {
+  children?: ReactNode;  // Make children optional
+}
+
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
-      <Container maxWidth="lg">
-      <Grid container spacing={2}>
-  <Grid item xs={12} sm={3}>
-    <SideBar />
-  </Grid>
-  <Grid item xs={12} sm={9}>
-    <Content>
-      <Outlet />
-    </Content>
-  </Grid>
-</Grid>
-
-      </Container>
+      <Sidebar />
+      <Content>
+        {children || <Outlet />} {/* Use Outlet if children is not provided */}
+      </Content>
       <Footer />
     </>
   );

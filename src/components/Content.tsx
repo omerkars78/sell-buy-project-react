@@ -1,14 +1,16 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
+// components/Content.tsx
+import React, { ReactNode } from 'react';
 
 interface ContentProps {
-  children?: React.ReactNode; // `children` prop'unun tipini React.ReactNode olarak belirliyoruz
+  children: ReactNode;
 }
 
-const Content: React.FC<ContentProps> = ({ children }) => (
-  <Box component="main" sx={{ p: 3 }}>
-    {children}
-  </Box>
-);
+const Content: React.FC<ContentProps> = ({ children }) => {
+  return (
+    <main style={{ padding: '15px' }}>
+      {children}
+    </main>
+  );
+};
 
 export default Content;

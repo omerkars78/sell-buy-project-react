@@ -1,16 +1,14 @@
-import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+// pages/HomePage.tsx
+import React from 'react';
+import Content from '../components/Content';
 
-const HomePage: React.FC = () => {
+const Home: React.FC = () => {
   return (
-    <Box sx={{ my: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Ana Sayfa
-      </Typography>
-      {/* Ana sayfa içeriğiniz burada yer alacak */}
-    </Box>
+  
+    <Content>
+        
+      </Content>
   );
 };
 
-export default HomePage;
+export default Home;
