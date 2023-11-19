@@ -1,17 +1,18 @@
-// components/Content.tsx
 import React, { ReactNode } from 'react';
 
 interface ContentProps {
   children: ReactNode;
-  className?: string;
+  className?: string; // className prop'u opsiyonel
 }
 
+// Content.tsx
 const Content: React.FC<ContentProps> = ({ children, className }) => {
   return (
-    <main className={className}>
+    <div className={`content-container ${className}`} style={{ marginTop: '60px' }}>
       {children}
-    </main>
+    </div>
   );
 };
+
 
 export default Content;
