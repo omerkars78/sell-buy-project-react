@@ -1,7 +1,7 @@
 // components/Register.tsx
 import React, { useState } from 'react';
 import { signup } from '../services/authService';
-import { Button, TextField, Box, Container, Grid } from '@mui/material';
+import { Button, TextField,  Typography, Container, Grid } from '@mui/material';
 
 interface SignupData {
     name: string;
@@ -67,7 +67,10 @@ const Register: React.FC = () => {
     };
 
     return (
-        <Container maxWidth="md" style={{ marginTop: '20px' }}>
+        <Container maxWidth="md" style={{ marginTop: '40px' }}>
+             <Typography component="h1" variant="h5" style={{ textAlign: 'center' }}>
+                    Register
+                </Typography>
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
@@ -75,14 +78,14 @@ const Register: React.FC = () => {
                         <TextField fullWidth label="Name" value={name} onChange={(e) => setName(e.target.value)} required margin="normal" />
                         <TextField fullWidth label="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} required margin="normal" />
                         <TextField fullWidth label="Nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} required margin="normal" />
-                        <TextField fullWidth label="Gender ID" type="number" value={genderId} onChange={(e) => setGenderId(e.target.value)} required margin="normal" />
+                        <TextField fullWidth label="Gender" type="number" value={genderId} onChange={(e) => setGenderId(e.target.value)} required margin="normal" />
                         <TextField fullWidth type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} required margin="normal" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                         {/* Sağ sütundaki inputlar */}
                         <TextField fullWidth label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required margin="normal" />
                         <TextField fullWidth label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required margin="normal" />
-                        <TextField fullWidth label="Profile Image URL" value={profileImage} onChange={(e) => setProfileImage(e.target.value)} margin="normal" />
+                        <TextField fullWidth label="Profile Image " value={profileImage} onChange={(e) => setProfileImage(e.target.value)} margin="normal" />
                         <TextField fullWidth label="User Type" value={userType} onChange={(e) => setUserType(e.target.value)} margin="normal" />
                         <TextField fullWidth label="Country" value={country} onChange={(e) => setCountry(e.target.value)} margin="normal" />
                     </Grid>
@@ -92,11 +95,12 @@ const Register: React.FC = () => {
                         <TextField fullWidth label="District" value={district} onChange={(e) => setDistrict(e.target.value)} margin="normal" />
                         <TextField fullWidth label="School" value={school} onChange={(e) => setSchool(e.target.value)} required margin="normal" />
                         <TextField fullWidth label="Detailed Address" value={detailedAddress} onChange={(e) => setDetailedAddress(e.target.value)} required margin="normal" />
-                        <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: '20px' }}>
+                        <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: '20px' , marginBottom:'20px'}}>
                             Register
                         </Button>
-                        {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
+                        {error && <div style={{ color: 'red', marginTop: '20px', marginBottom:'20px' }}>{error}</div>}
                     </Grid>
+                   
                 </Grid>
             </form>
         </Container>
