@@ -1,6 +1,7 @@
 // components/Register.tsx
 import React, { useState } from 'react';
 import { signup } from '../services/authService';
+import { Button, TextField, Box, Container, Grid } from '@mui/material';
 
 interface SignupData {
     name: string;
@@ -66,26 +67,39 @@ const Register: React.FC = () => {
     };
 
     return (
-        <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required /><br />
-                <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} placeholder="Surname" required /><br />
-                <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="Nickname" required /><br />
-                <input type="number" value={genderId} onChange={(e) => setGenderId(e.target.value)} placeholder="Gender ID" required /><br />
-                <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} placeholder="Birthday" required /><br />
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required /><br />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required /><br />
-                <input type="text" value={profileImage} onChange={(e) => setProfileImage(e.target.value)} placeholder="Profile Image URL" /><br />
-                <input type="text" value={userType} onChange={(e) => setUserType(e.target.value)} placeholder="User Type" /><br />
-                <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} placeholder="Country" /><br />
-                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" required /><br />
-                <input type="text" value={district} onChange={(e) => setDistrict(e.target.value)} placeholder="District" /><br />
-                <input type="text" value={school} onChange={(e) => setSchool(e.target.value)} placeholder="School" required /><br />
-                <input type="text" value={detailedAddress} onChange={(e) => setDetailedAddress(e.target.value)} placeholder="Detailed Address" required /><br />
-                <button type="submit" style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>Register</button>
-                {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
+        <Container maxWidth="md" style={{ marginTop: '20px' }}>
+            <form onSubmit={handleSubmit}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={6}>
+                        {/* Sol sütundaki inputlar */}
+                        <TextField fullWidth label="Name" value={name} onChange={(e) => setName(e.target.value)} required margin="normal" />
+                        <TextField fullWidth label="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} required margin="normal" />
+                        <TextField fullWidth label="Nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} required margin="normal" />
+                        <TextField fullWidth label="Gender ID" type="number" value={genderId} onChange={(e) => setGenderId(e.target.value)} required margin="normal" />
+                        <TextField fullWidth type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} required margin="normal" />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        {/* Sağ sütundaki inputlar */}
+                        <TextField fullWidth label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required margin="normal" />
+                        <TextField fullWidth label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required margin="normal" />
+                        <TextField fullWidth label="Profile Image URL" value={profileImage} onChange={(e) => setProfileImage(e.target.value)} margin="normal" />
+                        <TextField fullWidth label="User Type" value={userType} onChange={(e) => setUserType(e.target.value)} margin="normal" />
+                        <TextField fullWidth label="Country" value={country} onChange={(e) => setCountry(e.target.value)} margin="normal" />
+                    </Grid>
+                    <Grid item xs={12}>
+                        {/* Alt kısım */}
+                        <TextField fullWidth label="City" value={city} onChange={(e) => setCity(e.target.value)} required margin="normal" />
+                        <TextField fullWidth label="District" value={district} onChange={(e) => setDistrict(e.target.value)} margin="normal" />
+                        <TextField fullWidth label="School" value={school} onChange={(e) => setSchool(e.target.value)} required margin="normal" />
+                        <TextField fullWidth label="Detailed Address" value={detailedAddress} onChange={(e) => setDetailedAddress(e.target.value)} required margin="normal" />
+                        <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: '20px' }}>
+                            Register
+                        </Button>
+                        {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
+                    </Grid>
+                </Grid>
             </form>
-        </div>
+        </Container>
     );
 };
 

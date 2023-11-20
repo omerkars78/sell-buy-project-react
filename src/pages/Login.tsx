@@ -1,6 +1,7 @@
 // components/Login.tsx
 import React, { useState } from 'react';
 import { login } from '../services/authService';
+import { Button, TextField, Box, Typography, Container } from '@mui/material';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -23,28 +24,59 @@ const Login: React.FC = () => {
     };
 
     return (
-        <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <input
-                    type="email"
+        <Container maxWidth="sm" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                noValidate
+                sx={{ mt: 1 }}
+                style={{ width: '100%', maxWidth: 400, margin: 'auto' }}
+            >
+                <Typography component="h1" variant="h5" style={{ textAlign: 'center' }}>
+                    Login
+                </Typography>
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    required
-                    style={{ padding: '10px', fontSize: '16px' }}
                 />
-                <input
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
                     type="password"
+                    id="password"
+                    autoComplete="current-password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    required
-                    style={{ padding: '10px', fontSize: '16px' }}
                 />
-                <button type="submit" style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>Login</button>
-                {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
-            </form>
-        </div>
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    style={{ marginTop: 16 }}
+                >
+                    Login
+                </Button>
+                {error && (
+                    <Typography color="error" style={{ marginTop: 16, textAlign: 'center' }}>
+                        {error}
+                    </Typography>
+                )}
+            </Box>
+        </Container>
     );
 };
 

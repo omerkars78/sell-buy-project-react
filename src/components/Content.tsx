@@ -6,10 +6,13 @@ interface ContentProps {
 }
 
 // Content.tsx
+// Content.tsx
 const Content: React.FC<ContentProps> = ({ children, className }) => {
   return (
-    <div className={`content-container ${className}`} style={{ marginTop: '60px' }}>
-      {children}
+    <div className={`content-container ${className}`} style={{ marginTop: '60px', display: 'flex' , flexDirection: 'row'}}>
+      <div style={{ flex: 2 }}> {/* Sol Reklam Alanı */}</div>
+      <div style={{ flex: 8 }}>{children}</div> {/* Ana İçerik */}
+      <div style={{ flex: 2 }}> {/* Sağ Reklam Alanı */}</div>
     </div>
   );
 };
