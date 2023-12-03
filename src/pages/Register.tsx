@@ -1,9 +1,10 @@
 // components/Register.tsx
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, CSSProperties } from 'react';
 import { signup } from '../services/authService';
 import { Button, TextField, Typography, Container, Grid, IconButton, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useNavigate } from 'react-router-dom';
+
 import EditIcon from '@mui/icons-material/Edit';
 interface SignupData {
     name: string;
@@ -21,15 +22,15 @@ const Register: React.FC = () => {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [nickname, setNickname] = useState('');
-    const [genderId, setGenderId] = useState<number | undefined>();   
-     const [birthday, setBirthday] = useState<string | ''>('');
+    const [genderId, setGenderId] = useState<number | undefined>();
+    const [birthday, setBirthday] = useState<string | ''>('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [profileImage, setProfileImage] = useState('');
-    const [userType, setUserType] = useState<number | undefined>();   
+    const [userType, setUserType] = useState<number | undefined>();
     const [error, setError] = useState<string | null>(null);
     const [confirmPassword, setConfirmPassword] = useState('');
-
+    const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     const isPasswordValid = passwordRegex.test(password);
     const isConfirmPasswordValid = password === confirmPassword;
@@ -41,10 +42,12 @@ const Register: React.FC = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleProfileImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files[0]) {
+        if (event.target.files && event.target.files.length > 0) {
             setProfileImage(URL.createObjectURL(event.target.files[0]));
+            setProfileImageFile(event.target.files[0]); // Seçilen dosyayı sakla
         }
     };
+    
 
     const handleIconClick = () => {
         if (fileInputRef.current) {
@@ -53,21 +56,21 @@ const Register: React.FC = () => {
     };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-    
+
         // Check if the passwords are valid and match
         if (!passwordRegex.test(password)) {
             setError('Password does not meet the required criteria.');
             return;
         }
-    
+
         if (password !== confirmPassword) {
             setError('Passwords do not match.');
             return;
         }
-    
+
         // Clear any existing error messages
         setError(null);
-    
+
         try {
             const data = await signup({
                 name,
@@ -89,28 +92,46 @@ const Register: React.FC = () => {
             }
         }
     };
-    
+    const iconContainerStyle: CSSProperties = {
+        position: 'absolute',
+        top: 'calc(82% - 20px)', // Yuvarlak konteynerin alt kenarından itibaren
+        left: 'calc(57% - 20px)', // Yuvarlak konteynerin sağ kenarından itibaren
+        backgroundColor: 'white',
+        borderRadius: '50%',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.25)',
+        padding: '5px',
+        zIndex: 5 // Kalem ikonunu daha üst bir katmanda göster
+    };
 
     return (
         <Container maxWidth="md" style={{ marginTop: '40px' }}>
 
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2} justifyContent="center">
-                    <Grid item xs={12} style={{ textAlign: 'center' }}>
-                        {/* Circular Container for Profile Image */}
+                    <Grid item xs={12} style={{ textAlign: 'center', position: 'relative' }}>
                         <div style={{
                             margin: 'auto',
                             width: '150px',
                             height: '150px',
                             borderRadius: '50%',
-                            position: 'relative',
                             overflow: 'hidden',
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            backgroundColor: '#f0f0f0'
+                            backgroundColor: '#f0f0f0',
                         }}>
-                            {profileImage && <img src={profileImage} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+                            {profileImage && (
+                                <img
+                                    src={profileImage}
+                                    alt="Profile"
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover', // Resmi konteyner içine sığdır
+                                        borderRadius: '50%', // Yuvarlak bir şekil ver
+                                    }}
+                                />
+                            )}
                             <input
                                 accept="image/*"
                                 style={{ display: 'none' }}
@@ -119,19 +140,10 @@ const Register: React.FC = () => {
                                 onChange={handleProfileImageChange}
                                 ref={fileInputRef}
                             />
+                        </div>
+                        <div style={iconContainerStyle}> {/* Kalem ikonu için yeni konumlandırma ve katman ayarı */}
                             <label htmlFor="profile-image-file">
-                                <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleIconClick} style={{
-                                    position: 'absolute',
-                                    bottom: '0',
-                                    right: '0',
-                                    transform: 'translate(50%, 50%)',
-                                    backgroundColor: 'white',
-                                    borderRadius: '50%',
-                                    boxShadow: '0 2px 4px rgba(0,0,0,0.25)',
-                                    padding: '10px',
-                                    zIndex: 2, // Ensure it's on top
-                                    color: 'black' // Ensure the icon is visible
-                                }}>
+                                <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleIconClick}>
                                     <EditIcon />
                                 </IconButton>
                             </label>
@@ -171,7 +183,7 @@ const Register: React.FC = () => {
                         <TextField fullWidth label="Confirm Password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required margin="normal" />
                     </Grid>
 
-           
+
 
                 </Grid>
                 <Grid item xs={12} md={6}>
