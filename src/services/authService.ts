@@ -7,17 +7,13 @@ const api = axios.create({
 export const signup = async (data: {
     name: string;
     surname: string;
+    nickname:string;
     genderId: number;
     birthday: Date;
     email: string;
     password: string;
-    profileImage?: string;
-    userType?: string;
-    country?: string;
-    city: string;
-    district?: string;
-    school: string;
-    detailedAddress: string;
+    userType?: number;
+    
 }) => {
     try {
         const response = await api.post('/auth/signup', data);
