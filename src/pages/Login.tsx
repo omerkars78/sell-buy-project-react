@@ -2,18 +2,19 @@
 import React, { useState } from 'react';
 import { login } from '../services/authService';
 import { Button, TextField, Box, Typography, Container } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
-
+    const navigate = useNavigate();
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             const data = await login({ email, password });
             console.log('Login success:', data);
-            // Burada başarılı giriş sonrası işlemler yapılabilir
+            navigate('/');
         } catch (error) {
             if (error instanceof Error) {
                 setError(error.message);

@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { signup } from '../services/authService';
 import { Button, TextField, Typography, Container, Grid, IconButton, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 interface SignupData {
     name: string;
@@ -33,6 +34,7 @@ const Register: React.FC = () => {
     const isPasswordValid = passwordRegex.test(password);
     const isConfirmPasswordValid = password === confirmPassword;
 
+    const navigate = useNavigate();
 
 
 
@@ -78,6 +80,7 @@ const Register: React.FC = () => {
                 userType,
             } as SignupData);
             console.log('Registration success:', data);
+            navigate('/');
         } catch (error) {
             if (error instanceof Error) {
                 setError(error.message);
